@@ -36,21 +36,21 @@ const fetchDefinition = wordId => (dispatch) => {
     .then(json => dispatch(receiveDefinition(wordId, json)));
 };
 
-// const shouldFetchSynonyms = (state, synonym) => {
-//   const synonyms = state.synonymsReducer.thesaurus[synonym];
-//
-//   if (!synonyms) {
-//     return true;
-//   }
-//   if (synonyms.isFetching) {
-//     return false;
-//   }
-//   return false;
-// };
+const shouldFetchDefinition = (state, word) => {
+  const definition = state.wordsReducer.dictionary[word];
+
+  if (!definition) {
+    return true;
+  }
+  if (definition.isFetching) {
+    return false;
+  }
+  return false;
+};
 
 export const fetchDefinitionIfNeeded = word => (dispatch, getState) => {
-  // if (shouldFetchSynonyms(getState(), word)) {
-  return dispatch(fetchDefinition(word));
-  // }
-  // return null;
+  if (shouldFetchDefinition(getState(), word)) {
+    return dispatch(fetchDefinition(word));
+  }
+  return null;
 };

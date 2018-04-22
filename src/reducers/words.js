@@ -6,11 +6,11 @@ import {
 
 const initialState = { currentWord: '', dictionary: {} };
 
-export default (state, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_WORD:
       return {
-        ...initialState,
+        ...state,
         currentWord: action.word,
       };
     case REQUEST_DEFINITIONS:
