@@ -12,8 +12,12 @@ export default class List extends Component {
       <ul>
         {
           words.map(word => (
-            <li key={word}>
-              {word}
+            <li key={word} >
+              <span
+                onClick={() => {this.props.setCurrentWord(word)}}
+              >
+                {word}
+              </span>
             </li>
           ))
         }

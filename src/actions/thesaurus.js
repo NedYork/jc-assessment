@@ -49,7 +49,6 @@ export const fetchSynonymsIfNeeded = synonym => (dispatch, getState) => {
   return null;
 };
 
-
 export const CLEAR_STORE = 'CLEAR_STORE';
 
 export const clearStore = () => ({
