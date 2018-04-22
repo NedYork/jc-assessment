@@ -4,7 +4,12 @@ import { Panel } from 'react-bootstrap';
 
 import './Word.css';
 
-const Word = ({ word, definitions, synonyms, setWord }) => (
+const Word = ({
+  word,
+  definitions,
+  synonyms,
+  setWord,
+}) => (
   <div>
     <Panel>
       <Panel.Heading>
@@ -29,10 +34,7 @@ const Word = ({ word, definitions, synonyms, setWord }) => (
         <ul>
           {
             synonyms && synonyms.map(syn => (
-              <li
-                key={syn}
-                onClick={() => { setWord(syn); }}
-              >
+              <li key={syn} onClick={() => { setWord(syn); }} >
                 {syn}
               </li>
             ))
