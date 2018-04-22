@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
         isFetching: false,
         thesaurus: {
           ...state.thesaurus,
-          [action.word]: action.synonyms.map(wordObj => wordObj.text),
+          [action.word]: action.synonyms.map(wordObj => wordObj.id),
         },
       };
     default:
