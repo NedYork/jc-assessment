@@ -13,8 +13,7 @@ BONUS:
 
 ## Note
 
-To run this project, you will need a `config.js` file placed into the src directory.
-Once you have this file, to run locally:
+To run this project, you will need a `config.js` file placed into the src directory. Ideally, the API keys should be stored and used server-side. Once you have this file, to run locally:
 1. Clone the repo
 2. Place the `config.js` file into the `src` directory
 3. Run `npm install`
