@@ -11,6 +11,9 @@ const Word = ({ word, definitions, synonyms, setWord }) => (
         <Panel.Title componentClass="h3">{word}</Panel.Title>
       </Panel.Heading>
       <Panel.Body>
+        {
+          definitions && <h3 className="def-syn-title">Definition</h3>
+        }
         <ul>
           {
             definitions && definitions.map(def => (
@@ -20,7 +23,9 @@ const Word = ({ word, definitions, synonyms, setWord }) => (
             ))
           }
         </ul>
-
+        {
+          synonyms && <h3 className="def-syn-title">Synonyms</h3>
+        }
         <ul>
           {
             synonyms && synonyms.map(syn => (
