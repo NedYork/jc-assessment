@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+
 const List = ({ words, setWord }) => (
-  <ul>
+  <ListGroup>
     {
       words.map(word => (
-        <li key={word} >
-          <span
-            onClick={() => {setWord(word)}}
-          >
-            {word}
-          </span>
-        </li>
+        <ListGroupItem
+          key={word}
+          onClick={() => {setWord(word)}}
+        >
+          {word}
+        </ListGroupItem>
       ))
     }
-  </ul>
+  </ListGroup>
 );
 
 List.propTypes = {

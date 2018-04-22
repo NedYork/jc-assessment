@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button, FormControl, FormGroup } from 'react-bootstrap';
 
 export default class SearchForm extends Component {
   static propTypes = {
@@ -26,15 +27,17 @@ export default class SearchForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="user-input">
-          Category:
-          <input
+        <FormGroup
+          controlId="formBasicText"
+        >
+          <FormControl
             type="text"
+            placeholder="Enter text"
             value={this.state.userInput}
             onChange={this.handleChange}
           />
-        </label>
-        <input type="submit" value="Submit" />
+        </FormGroup>
+        <Button type="submit">Submit</Button>
       </form>
     );
   }

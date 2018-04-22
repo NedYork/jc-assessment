@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import { Button, Grid, Jumbotron } from 'react-bootstrap';
+
 import { clearStore, fetchSynonymsIfNeeded } from '../actions/thesaurus';
 import { fetchDefinitionIfNeeded, setCurrentWord } from '../actions/words';
 import SearchForm from '../components/SearchForm';
 import List from '../components/List';
+import Word from '../components/Word';
+
 import './App.css';
 
 class App extends Component {
@@ -28,36 +33,36 @@ class App extends Component {
     this.props.dispatch(fetchDefinitionIfNeeded(word));
   }
 
-  renderCurrentWord() {
-    const { currentWord, dictionary } = this.props;
-    return dictionary[currentWord] ? (
-      <div>
-        <h3>Current Word: {currentWord}</h3>
-        <ul>
-          {
-            dictionary[currentWord].map(def => (
-              <li key={def}>
-                {def}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    ) : null;
-  }
-
   render() {
-    const { thesaurus } = this.props;
+    const { currentWord, dictionary, thesaurus } = this.props;
     const previouslySearchedWords = Object.keys(thesaurus);
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">JumpCut Thesaurus</h1>
-          <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
-        </header>
-        <button onClick={this.dispatchClearStore}> Clear </button>
-        { this.renderCurrentWord() }
-        <List words={previouslySearchedWords} setWord={this.dispatchSetCurrentWord} />
+        <Jumbotron>
+          <h1>JumpCut Thesaurus</h1>
+          <br />
+          <p>
+            This is a simple hero unit, a simple jumbotron-style component for calling
+            extra attention to featured content or information.
+          </p>
+          <Grid>
+            <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
+            <Button
+              bsStyle="danger"
+              onClick={this.dispatchClearStore}
+            >
+              Clear History
+            </Button>
+          </Grid>
+        </Jumbotron>
+
+        <Grid>
+          {
+            dictionary[currentWord] &&
+            <Word word={currentWord} definitions={dictionary[currentWord]} />
+          }
+          <List words={previouslySearchedWords} setWord={this.dispatchSetCurrentWord} />
+        </Grid>
       </div>
     );
   }
