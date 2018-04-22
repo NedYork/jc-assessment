@@ -33,7 +33,8 @@ const fetchDefinition = wordId => (dispatch) => {
     },
   })
     .then(response => response.json())
-    .then(json => dispatch(receiveDefinition(wordId, json)));
+    .then(json => dispatch(receiveDefinition(wordId, json)))
+    .catch((err) => { console.log(err); });
 };
 
 const shouldFetchDefinition = (state, word) => {

@@ -27,7 +27,8 @@ const fetchSynonyms = word => (dispatch) => {
     },
   })
     .then(response => response.json())
-    .then(json => dispatch(receiveSynonyms(word, json)));
+    .then(json => dispatch(receiveSynonyms(word, json)))
+    .catch((err) => { console.log(err); });
 };
 
 const shouldFetchSynonyms = (state, synonym) => {

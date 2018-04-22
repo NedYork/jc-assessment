@@ -9,7 +9,7 @@ const List = ({ words, setWord }) => (
       words.map(word => (
         <ListGroupItem
           key={word}
-          onClick={() => {setWord(word)}}
+          onClick={() => { setWord(word); }}
         >
           {word}
         </ListGroupItem>

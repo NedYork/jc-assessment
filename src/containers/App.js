@@ -42,8 +42,7 @@ class App extends Component {
           <h1>JumpCut Thesaurus</h1>
           <br />
           <p>
-            This is a simple hero unit, a simple jumbotron-style component for calling
-            extra attention to featured content or information.
+            This is a JumpCut Thesaurus. It gives a
           </p>
           <Grid>
             <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
