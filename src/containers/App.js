@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Button, Grid, Jumbotron } from 'react-bootstrap';
+import { Button, Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 
 import { clearStore, fetchSynonymsIfNeeded } from '../actions/thesaurus';
 import { fetchDefinitionIfNeeded, setCurrentWord } from '../actions/words';
@@ -36,6 +36,7 @@ class App extends Component {
   render() {
     const { currentWord, dictionary, thesaurus } = this.props;
     const previouslySearchedWords = Object.keys(thesaurus);
+
     return (
       <div className="App">
         <Jumbotron>
@@ -56,11 +57,28 @@ class App extends Component {
         </Jumbotron>
 
         <Grid>
-          {
-            dictionary[currentWord] &&
-            <Word word={currentWord} definitions={dictionary[currentWord]} />
-          }
-          <List words={previouslySearchedWords} setWord={this.dispatchSetCurrentWord} />
+          <Row>
+            <Col xs={6} md={6}>
+              <List
+                words={previouslySearchedWords}
+                setWord={this.dispatchSetCurrentWord}
+              />
+            </Col>
+            <Col xs={6} md={6}>
+              {
+                dictionary[currentWord] &&
+                <Word
+                  word={currentWord}
+                  definitions={dictionary[currentWord]}
+                  synonyms={thesaurus[currentWord]}
+                  setWord={this.dispatchSetCurrentWord}
+                />
+              }
+            </Col>
+
+          </Row>
+
+
         </Grid>
       </div>
     );

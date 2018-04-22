@@ -1,4 +1,0 @@
-export default {
-  APP_ID: 'f2dea066',
-  APP_KEY: '4daa4e689545a7ab075816aa41c74470',
-};

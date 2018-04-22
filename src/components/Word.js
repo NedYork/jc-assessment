@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
 
-const Word = ({ word, definitions }) => (
+import './Word.css';
+
+const Word = ({ word, definitions, synonyms, setWord }) => (
   <div>
     <Panel>
       <Panel.Heading>
@@ -11,12 +13,25 @@ const Word = ({ word, definitions }) => (
       <Panel.Body>
         <ul>
           {
-            definitions.map(def => (
+            definitions && definitions.map(def => (
               <li key={def}>
                 {def}
               </li>
             ))
-        }
+          }
+        </ul>
+
+        <ul>
+          {
+            synonyms && synonyms.map(syn => (
+              <li
+                key={syn}
+                onClick={() => { setWord(syn); }}
+              >
+                {syn}
+              </li>
+            ))
+          }
         </ul>
       </Panel.Body>
     </Panel>
@@ -25,7 +40,9 @@ const Word = ({ word, definitions }) => (
 
 Word.propTypes = {
   word: PropTypes.string.isRequired,
-  definitions: PropTypes.array.isRequired,
+  definitions: PropTypes.array,
+  synonyms: PropTypes.array,
+  setWord: PropTypes.func,
 };
 
 export default Word;
