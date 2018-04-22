@@ -42,7 +42,7 @@ class App extends Component {
           <h1>JumpCut Thesaurus</h1>
           <br />
           <p>
-            This is a JumpCut Thesaurus. It gives a
+            This is a JumpCut Thesaurus. We only give the best synonyms.
           </p>
           <Grid>
             <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
