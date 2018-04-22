@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import {
   REQUEST_SYNONYMS,
   RECEIVE_SYNONYMS,
+  CLEAR_STORE,
 } from '../actions';
 
 const initialState = {
@@ -11,6 +12,10 @@ const initialState = {
 
 const synonymsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_STORE:
+      return {
+        ...initialState,
+      };
     case REQUEST_SYNONYMS:
       return {
         ...state,
