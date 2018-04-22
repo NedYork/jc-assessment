@@ -14,7 +14,7 @@ export default class List extends Component {
           words.map(word => (
             <li key={word} >
               <span
-                onClick={() => {this.props.setCurrentWord(word)}}
+                onClick={() => {this.props.setWord(word)}}
               >
                 {word}
               </span>
