@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, FormControl, FormGroup } from 'react-bootstrap';
 
+import '../stylesheets/SearchForm.css';
+
 export default class SearchForm extends Component {
   static propTypes = {
     dispatchFetchSynonym: PropTypes.func.isRequired,
@@ -26,7 +28,10 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        onSubmit={this.handleSubmit}
+        className="SearchForm-container"
+      >
         <FormGroup
           controlId="formBasicText"
         >

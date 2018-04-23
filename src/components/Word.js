@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
 
-import './Word.css';
+import '../stylesheets/Word.css';
 
 const Word = ({
   word,
@@ -17,7 +17,7 @@ const Word = ({
       </Panel.Heading>
       <Panel.Body>
         {
-          definitions && <h3 className="def-syn-title">Definition</h3>
+          definitions && <h3 className="Word-def-syn-title">Definition</h3>
         }
         <ul>
           {
@@ -29,12 +29,16 @@ const Word = ({
           }
         </ul>
         {
-          synonyms && <h3 className="def-syn-title">Synonyms</h3>
+          synonyms && <h3 className="Word-def-syn-title">Synonyms</h3>
         }
         <ul>
           {
             synonyms && synonyms.map(syn => (
-              <li key={syn} onClick={() => { setWord(syn); }} >
+              <li
+                key={syn}
+                onClick={() => { setWord(syn); }}
+                className="Word-synonym-li"
+              >
                 {syn}
               </li>
             ))

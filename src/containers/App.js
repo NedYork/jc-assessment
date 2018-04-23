@@ -10,7 +10,7 @@ import SearchForm from '../components/SearchForm';
 import List from '../components/List';
 import Word from '../components/Word';
 
-import './App.css';
+import '../stylesheets/App.css';
 
 class App extends Component {
   static propTypes = {
@@ -18,6 +18,7 @@ class App extends Component {
     dictionary: PropTypes.object,
     thesaurus: PropTypes.object,
     currentWord: PropTypes.string,
+    fetchError: PropTypes.bool,
   }
 
   dispatchFetchSynonym = (word) => {
@@ -34,7 +35,12 @@ class App extends Component {
   }
 
   render() {
-    const { currentWord, dictionary, thesaurus } = this.props;
+    const {
+      currentWord,
+      dictionary,
+      thesaurus,
+      fetchError,
+    } = this.props;
     const previouslySearchedWords = Object.keys(thesaurus);
 
     return (
@@ -46,6 +52,12 @@ class App extends Component {
             This is a JumpCut Thesaurus. We only give the best synonyms.
           </p>
           <Grid>
+            {
+              fetchError &&
+              <h4 className="App-search-err">
+                Cannot find word in Thesaurus.
+              </h4>
+            }
             <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
             <Button
               bsStyle="danger"
@@ -75,10 +87,7 @@ class App extends Component {
                 />
               }
             </Col>
-
           </Row>
-
-
         </Grid>
       </div>
     );
@@ -86,6 +95,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+  fetchError: state.synonymsReducer.fetchError,
   thesaurus: state.synonymsReducer.thesaurus,
   dictionary: state.wordsReducer.dictionary,
   currentWord: state.wordsReducer.currentWord,

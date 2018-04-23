@@ -1,0 +1,12 @@
+.Word-def-syn-title {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.Word-synonym-li {
+  cursor: default;
+}
+
+.Word-synonym-li:hover {
+  color: #337ab7;
+}
