@@ -20,6 +20,10 @@ To run this project, you will need a `config.js` file placed into the src direct
 4. Run `npm start`
 5. Visit `localhost:3000`
 
+  * Other Notes
+  1. There was a CORS issue hitting the Dictionary API. This was resolved with a proxy.
+  2. Bootstrap was used for most of the styling. CSS was also used secondarily.
+
 ## Libraries Used
 
 * [React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap) (For styling).
@@ -27,6 +31,3 @@ To run this project, you will need a `config.js` file placed into the src direct
 * [Redux-Logger](https://github.com/evgenyrodionov/redux-logger) (Redux debugging).
 * [Redux-Persist](https://github.com/rt2zz/redux-persist) (State persistence).
 * [Redux-Thunk](https://github.com/gaearon/redux-thunk) (Middleware).
-
-## Bugs to be fixed
-* Error-handling for invalid inputs
