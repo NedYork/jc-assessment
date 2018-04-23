@@ -2,6 +2,7 @@ import CONFIG from './../config';
 
 export const REQUEST_SYNONYMS = 'REQUEST_SYNONYMS';
 export const RECEIVE_SYNONYMS = 'RECEIVE_SYNONYMS';
+export const REQUEST_SYNONYMS_ERR = 'REQUEST_SYNONYMS_ERR';
 
 export const requestSynonyms = word => ({
   type: REQUEST_SYNONYMS,
@@ -15,6 +16,10 @@ export const receiveSynonyms = (word, json) => ({
   receivedAt: Date.now(),
 });
 
+export const receiveSynonymsErr = () => ({
+  type: REQUEST_SYNONYMS_ERR,
+});
+
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const fetchSynonyms = word => (dispatch) => {
   dispatch(requestSynonyms(word));
@@ -26,7 +31,13 @@ const fetchSynonyms = word => (dispatch) => {
       app_key: CONFIG.APP_KEY,
     },
   })
-    .then(response => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        dispatch(receiveSynonymsErr(word));
+        throw new Error('Something went wrong');
+      }
+      return response.json();
+    })
     .then(json => dispatch(receiveSynonyms(word, json)))
     .catch((err) => { console.log(err); });
 };
