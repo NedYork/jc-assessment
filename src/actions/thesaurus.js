@@ -1,5 +1,5 @@
 import CONFIG from './../config';
-import { clearStatus, receiveError } from './status';
+import { clearStatus, isLoading, receiveError } from './status';
 
 export const REQUEST_SYNONYMS = 'REQUEST_SYNONYMS';
 export const RECEIVE_SYNONYMS = 'RECEIVE_SYNONYMS';
@@ -19,6 +19,7 @@ export const receiveSynonyms = (word, json) => ({
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const fetchSynonyms = word => (dispatch) => {
   dispatch(requestSynonyms(word));
+  dispatch(isLoading());
   const url = `https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${word}/synonyms`;
   return fetch(`${proxyUrl}${url}`, {
     headers: {

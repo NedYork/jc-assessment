@@ -31,6 +31,6 @@ export default (state = initialState, action) => {
         errorMessage: action.error,
       };
     default:
-      return state;
+      return initialState;
   }
 };

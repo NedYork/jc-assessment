@@ -20,7 +20,6 @@ class App extends Component {
     thesaurus: PropTypes.object,
     currentWord: PropTypes.string,
     statusState: PropTypes.object,
-    isLoading: PropTypes.bool,
   }
 
   dispatchFetchSynonym = (word) => {
@@ -42,7 +41,6 @@ class App extends Component {
       dictionary,
       thesaurus,
       statusState,
-      isLoading,
     } = this.props;
     const previouslySearchedWords = Object.keys(thesaurus);
 
@@ -54,7 +52,6 @@ class App extends Component {
           <p>
             This is a JumpCut Thesaurus. We only give the best synonyms.
           </p>
-          { isLoading && <Loading />}
           <Grid>
             {
               statusState.error &&
@@ -73,7 +70,7 @@ class App extends Component {
             </Button>
           </Grid>
         </Jumbotron>
-
+        { statusState.isLoading && <Loading />}
         <Grid>
           <Row>
             <Col xs={6} md={6}>
@@ -101,7 +98,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoading: state.synonymsReducer.isFetching || state.wordsReducer.isFetching,
   statusState: state.statusReducer,
   thesaurus: state.synonymsReducer.thesaurus,
   dictionary: state.wordsReducer.dictionary,

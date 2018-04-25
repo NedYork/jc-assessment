@@ -1,5 +1,5 @@
 import CONFIG from './../config';
-import { clearStatus, receiveError } from './status';
+import { clearStatus, isLoading, receiveError } from './status';
 
 export const SET_CURRENT_WORD = 'SET_CURRENT_WORD';
 export const REQUEST_DEFINITIONS = 'REQUEST_DEFINITIONS';
@@ -25,6 +25,7 @@ export const receiveDefinition = (word, json) => ({
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const fetchDefinition = wordId => (dispatch) => {
   dispatch(requestDefinition(wordId));
+  dispatch(isLoading());
   const url = `https://od-api.oxforddictionaries.com:443/api/v1/entries/en/${wordId}`;
   return fetch(`${proxyUrl}${url}`, {
     headers: {
