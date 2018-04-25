@@ -8,6 +8,7 @@ import { clearStore, fetchSynonymsIfNeeded } from '../actions/thesaurus';
 import { fetchDefinitionIfNeeded, setCurrentWord } from '../actions/words';
 import SearchForm from '../components/SearchForm';
 import List from '../components/List';
+import Loading from '../components/Loading';
 import Word from '../components/Word';
 
 import '../stylesheets/App.css';
@@ -18,7 +19,8 @@ class App extends Component {
     dictionary: PropTypes.object,
     thesaurus: PropTypes.object,
     currentWord: PropTypes.string,
-    fetchError: PropTypes.bool,
+    statusState: PropTypes.object,
+    isLoading: PropTypes.bool,
   }
 
   dispatchFetchSynonym = (word) => {
@@ -39,7 +41,8 @@ class App extends Component {
       currentWord,
       dictionary,
       thesaurus,
-      fetchError,
+      statusState,
+      isLoading,
     } = this.props;
     const previouslySearchedWords = Object.keys(thesaurus);
 
@@ -51,11 +54,14 @@ class App extends Component {
           <p>
             This is a JumpCut Thesaurus. We only give the best synonyms.
           </p>
+          { isLoading && <Loading />}
           <Grid>
             {
-              fetchError &&
+              statusState.error &&
               <h4 className="App-search-err">
-                Cannot find word in Thesaurus.
+                {
+                  statusState.errorMessage
+                }
               </h4>
             }
             <SearchForm dispatchFetchSynonym={this.dispatchFetchSynonym} />
@@ -95,7 +101,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  fetchError: state.synonymsReducer.fetchError,
+  isLoading: state.synonymsReducer.isFetching || state.wordsReducer.isFetching,
+  statusState: state.statusReducer,
   thesaurus: state.synonymsReducer.thesaurus,
   dictionary: state.wordsReducer.dictionary,
   currentWord: state.wordsReducer.currentWord,

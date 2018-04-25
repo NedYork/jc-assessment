@@ -1,4 +1,5 @@
 import CONFIG from './../config';
+import { clearStatus, receiveError } from './status';
 
 export const SET_CURRENT_WORD = 'SET_CURRENT_WORD';
 export const REQUEST_DEFINITIONS = 'REQUEST_DEFINITIONS';
@@ -32,8 +33,18 @@ const fetchDefinition = wordId => (dispatch) => {
       app_key: CONFIG.APP_KEY,
     },
   })
-    .then(response => response.json())
-    .then(json => dispatch(receiveDefinition(wordId, json)))
+    .then((response) => {
+      if (!response.ok) {
+        const errMsg = 'Something went wrong. Cannot retreive definitions.';
+        dispatch(receiveError(errMsg));
+        throw new Error(errMsg);
+      }
+      return response.json();
+    })
+    .then((json) => {
+      dispatch(receiveDefinition(wordId, json));
+      dispatch(clearStatus());
+    })
     .catch((err) => { console.log(err); });
 };
 

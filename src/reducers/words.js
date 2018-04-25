@@ -4,7 +4,10 @@ import {
   RECEIVE_DEFINITIONS,
 } from '../actions/words';
 
-const initialState = { currentWord: '', dictionary: {} };
+const initialState = {
+  currentWord: '',
+  dictionary: {},
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +20,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
-        didInvalidate: false,
       };
     case RECEIVE_DEFINITIONS:
       return {
@@ -29,6 +31,6 @@ export default (state = initialState, action) => {
         },
       };
     default:
-      return initialState;
+      return state;
   }
 };

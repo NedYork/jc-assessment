@@ -1,8 +1,8 @@
 import CONFIG from './../config';
+import { clearStatus, receiveError } from './status';
 
 export const REQUEST_SYNONYMS = 'REQUEST_SYNONYMS';
 export const RECEIVE_SYNONYMS = 'RECEIVE_SYNONYMS';
-export const REQUEST_SYNONYMS_ERR = 'REQUEST_SYNONYMS_ERR';
 
 export const requestSynonyms = word => ({
   type: REQUEST_SYNONYMS,
@@ -14,10 +14,6 @@ export const receiveSynonyms = (word, json) => ({
   word,
   synonyms: json.results[0].lexicalEntries[0].entries[0].senses[0].synonyms,
   receivedAt: Date.now(),
-});
-
-export const receiveSynonymsErr = () => ({
-  type: REQUEST_SYNONYMS_ERR,
 });
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -33,12 +29,16 @@ const fetchSynonyms = word => (dispatch) => {
   })
     .then((response) => {
       if (!response.ok) {
-        dispatch(receiveSynonymsErr(word));
-        throw new Error('Something went wrong');
+        const errMsg = 'Something went wrong. Cannot retreive synonyms.';
+        dispatch(receiveError(errMsg));
+        throw new Error(errMsg);
       }
       return response.json();
     })
-    .then(json => dispatch(receiveSynonyms(word, json)))
+    .then((json) => {
+      dispatch(receiveSynonyms(word, json));
+      dispatch(clearStatus());
+    })
     .catch((err) => { console.log(err); });
 };
 
