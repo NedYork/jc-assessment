@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { Button, Grid, Row, Col, Jumbotron } from 'react-bootstrap';
 
 import { clearStore, fetchSynonymsIfNeeded } from '../actions/thesaurus';
 import { fetchDefinitionIfNeeded, setCurrentWord } from '../actions/words';
+
 import SearchForm from '../components/SearchForm';
 import List from '../components/List';
 import Loading from '../components/Loading';

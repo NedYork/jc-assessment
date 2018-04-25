@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from 'react-bootstrap';
 
+import { Panel } from 'react-bootstrap';
 import '../stylesheets/Word.css';
 
 const Word = ({

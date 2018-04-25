@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, FormControl, FormGroup } from 'react-bootstrap';
 
+import { Button, FormControl, FormGroup } from 'react-bootstrap';
 import '../stylesheets/SearchForm.css';
 
 export default class SearchForm extends Component {
